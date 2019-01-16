@@ -79,7 +79,8 @@ namespace Sinistar.UiControler
             //Takes the view size multiplies it by the scale position, adds the offset, then uses the anchor point to position it onto the screen
             int x = (int)((viewXSize * element.scaleX - element.sizeX * element.anchorPointX) + element.offsetX);
             int y = (int)((viewYSize * element.scaleY - element.sizeY * element.anchorPointY) + element.offsetY);
-            element.draw(spriteBatch, zScale * (float)element.getZIndex(), x, y);
+
+            element.draw(spriteBatch, new Vector2(element.sizeX * (float)element.anchorPointX, element.sizeY * (float)element.anchorPointY), zScale * (float)element.getZIndex(), x, y);
         }
         
         /// <summary>

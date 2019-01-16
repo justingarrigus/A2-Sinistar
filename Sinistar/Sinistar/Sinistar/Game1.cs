@@ -24,6 +24,8 @@ namespace Sinistar
 
         UiController uiController;
 
+        UIImage image;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -45,18 +47,27 @@ namespace Sinistar
             uiController = new UiController(spriteBatch, GraphicsDevice);
 
             UIText textLabel = new UIText(0.5, 0.5, 0, 0, this.Content.Load<SpriteFont>("SpriteFont2"));
-            textLabel.setAnchorPoint(0.5, 0.5);
-            textLabel.setText("TEST");
-            textLabel.setZIndex(2);
+            textLabel.setAnchorPoint(0, 0.5);
+            textLabel.setText("SOME LONG RANDOM TEXT");
+            textLabel.setZIndex(10);
 
-            UIText textLabel2 = new UIText(0.5, 0.5, 5, 5, this.Content.Load<SpriteFont>("SpriteFont2"));
-            textLabel2.setAnchorPoint(0.5, 0.5);
-            textLabel2.setText("SOME");
+            UIText textLabel2 = new UIText(0.8, 0.5, 0, 0, this.Content.Load<SpriteFont>("SpriteFont2"));
+
+            textLabel2.setAnchorPoint(0, 0.5);
+            textLabel2.setText("ANOTHER LONG STRING OF TEXT");
             textLabel2.textColor = Color.Red;
-            textLabel2.setZIndex(2);
+            textLabel2.setZIndex(4);
 
-            uiController.addElement(textLabel);
-            uiController.addElement(textLabel2);
+            image = new UIImage(0.5, 0.5, 0, 0, this.Content.Load<Texture2D>("Untitled"));
+            image.setAnchorPoint(0.5, 0.5);
+            image.sizeX = 100;
+            image.sizeY = 100;
+            
+
+
+            //uiController.addElement(textLabel);
+            uiController.addElement(image);
+
             base.Initialize();
         }
 
@@ -67,7 +78,7 @@ namespace Sinistar
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            font = Content.Load<SpriteFont>("SpriteFont1");
+            //font = Content.Load<SpriteFont>("SpriteFont1");
 
             // TODO: use this.Content to load your game content here
         }
@@ -94,6 +105,8 @@ namespace Sinistar
             uiController.updateScreenSize();
 
             // TODO: Add your update logic here
+
+            image.rotation += 1;
 
             base.Update(gameTime);
         }

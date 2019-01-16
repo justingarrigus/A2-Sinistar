@@ -41,8 +41,10 @@ namespace Sinistar.UiControler
         public double anchorPointX;
         public double anchorPointY;
 
+        public double rotAnchorX;
+        public double rotAnchorY;
+
         public float rotation;
-        public Vector2 rotationOrigin;
         public SpriteEffects spriteEffects;
         private int zIndex;
 
@@ -100,7 +102,7 @@ namespace Sinistar.UiControler
         /// <param name="zIndex"></param>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public abstract void draw(SpriteBatch spriteBatch, float zIndex, int x, int y);
+        public abstract void draw(SpriteBatch spriteBatch, double rotAnchorX, double rotAnchorY, float zIndex, int x, int y);
 
 
         /// <summary>
