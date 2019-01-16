@@ -8,6 +8,8 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using Sinistar.UiControler;
+using Sinistar.UiControler.UIElements;
 
 namespace Sinistar
 {
@@ -19,10 +21,14 @@ namespace Sinistar
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         SpriteFont font;
+
+        UiController uiController;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            IsMouseVisible = true;
         }
 
         /// <summary>
@@ -34,7 +40,23 @@ namespace Sinistar
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            uiController = new UiController(spriteBatch, GraphicsDevice);
+
+            UIText textLabel = new UIText(0.5, 0.5, 0, 0, this.Content.Load<SpriteFont>("SpriteFont2"));
+            textLabel.setAnchorPoint(0.5, 0.5);
+            textLabel.setText("TEST");
+            textLabel.setZIndex(2);
+
+            UIText textLabel2 = new UIText(0.5, 0.5, 5, 5, this.Content.Load<SpriteFont>("SpriteFont2"));
+            textLabel2.setAnchorPoint(0.5, 0.5);
+            textLabel2.setText("SOME");
+            textLabel2.textColor = Color.Red;
+            textLabel2.setZIndex(2);
+
+            uiController.addElement(textLabel);
+            uiController.addElement(textLabel2);
             base.Initialize();
         }
 
@@ -46,7 +68,6 @@ namespace Sinistar
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             font = Content.Load<SpriteFont>("SpriteFont1");
-            spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
         }
@@ -70,6 +91,7 @@ namespace Sinistar
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
+            uiController.updateScreenSize();
 
             // TODO: Add your update logic here
 
@@ -83,11 +105,14 @@ namespace Sinistar
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
+            uiController.drawElements();
+            
             // TODO: Add your drawing code here
-            spriteBatch.Begin();
-            spriteBatch.DrawString(font, "I AM ONE SEXY MAN ", new Vector2(50, 50), Color.Red);
-            spriteBatch.End();
+
+
+
+
+
             base.Draw(gameTime);
         }
     }

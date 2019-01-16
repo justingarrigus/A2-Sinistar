@@ -32,18 +32,32 @@ namespace Sinistar.UiControler
             this.elements = new List<UIElement>();
         }
 
-
+        /// <summary>
+        ///     Updates the screen size.
+        /// </summary>
         public void updateScreenSize()
         {
             viewXSize = graphicsDevice.Viewport.Width;
             viewYSize = graphicsDevice.Viewport.Height;
         }
 
-
+        /// <summary>
+        ///     Adds an element to this controller or frame.
+        /// </summary>
+        /// <param name="element"></param>
         public void addElement(UIElement element)
         {
             elements.Add(element);
         }
+
+        /// <summary>
+        ///     Adds an element to this controller or frame.
+        /// </summary>
+        /// <param name="element">Element to add</param>
+        /// <param name="ox">Offset of the element in the X direction</param>
+        /// <param name="oy">Offset of the element in the Y direction</param>
+        /// <param name="sx">Scale of the element in the X direction</param>
+        /// <param name="sy">Scale of the element in the Y direction</param>
         public void addElement(UIElement element, int ox, int oy, int sx, int sy)
         {
             element.offsetX = ox;
@@ -54,37 +68,32 @@ namespace Sinistar.UiControler
             elements.Add(element);
         }
 
-        public void drawElement(UIElement element)
-        {
-            //Takes the view size multiplies it by the scale position, adds the offset, then uses the anchor point to position it onto the screen
-            int x = (int)(viewXSize * element.scaleX + element.offsetX + element.sizeX * element.anchorPointX);
-            int y = (int)(viewYSize * element.scaleY + element.offsetY + element.sizeY * element.anchorPointY);
-
-            element.draw(spriteBatch, x, y);
-        }
-
-        
-        public void draw()
-        {
-            for (int i = 0; i <= elements.Count; i++) {
-                elements.ElementAt(i);
-            }
-
-        }
-
 
         /// <summary>
-        ///     This draws the provided text using the sprite font, 
+        ///     Draws a specific element
         /// </summary>
-        /// <param name="text"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        ///
-        public void drawText(string text, SpriteFont font, int textSize, double x, double y)
+        /// <param name="element">Element to draw</param>
+        /// <param name="zScale">ZIndex scale</param>
+        private void drawElement(UIElement element, float zScale)
         {
-            spriteBatch.DrawString()
+            //Takes the view size multiplies it by the scale position, adds the offset, then uses the anchor point to position it onto the screen
+            int x = (int)((viewXSize * element.scaleX - element.sizeX * element.anchorPointX) + element.offsetX);
+            int y = (int)((viewYSize * element.scaleY - element.sizeY * element.anchorPointY) + element.offsetY);
+            element.draw(spriteBatch, zScale * (float)element.getZIndex(), x, y);
         }
-
+        
+        /// <summary>
+        ///     Draws all registered elements
+        /// </summary>
+        public void drawElements()
+        {
+            spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
+            float zScale = 1f / (float)UIElement.getMaxZIndex();
+            for (int i = 0; i < elements.Count; i++) {
+                drawElement(elements.ElementAt(i), zScale);
+            }
+            spriteBatch.End();
+        }
 
         
     }

@@ -60,6 +60,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="UiControler\UIElement.cs" />
+    <Compile Include="UiControler\UiController.cs" />
+    <Compile Include="UiControler\UIElements\UIText.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
