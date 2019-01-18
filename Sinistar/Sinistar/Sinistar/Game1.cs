@@ -8,16 +8,19 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using Sinistar.Input;
 
 namespace Sinistar
 {
     /// <summary>
     /// This is the main type for your game
     /// </summary>
-    public class Game1 : Microsoft.Xna.Framework.Game
+    public class Game1 : Microsoft.Xna.Framework.Game, InputListener
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        InputManager manager;
 
         public Game1()
         {
@@ -34,6 +37,7 @@ namespace Sinistar
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            manager = new InputManager();
 
             base.Initialize();
         }
@@ -69,8 +73,10 @@ namespace Sinistar
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
+            manager.updateInput();
 
             // TODO: Add your update logic here
+            
 
             base.Update(gameTime);
         }
@@ -86,6 +92,18 @@ namespace Sinistar
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
+        }
+
+
+
+        public void InputBegan()
+        {
+           // throw new NotImplementedException();
+        }
+
+        public void InputEnded()
+        {
+           // throw new NotImplementedException();
         }
     }
 }
