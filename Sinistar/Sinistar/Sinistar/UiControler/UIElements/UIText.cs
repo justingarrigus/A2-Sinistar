@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
 
 namespace Sinistar.UiControler.UIElements
 {
@@ -53,9 +41,9 @@ namespace Sinistar.UiControler.UIElements
         /// <param name="zIndex"></param>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        public override void draw(SpriteBatch spriteBatch, float zIndex, int x, int y)
+        public override void draw(SpriteBatch spriteBatch, double r, double d, float zIndex, int x, int y)
         {
-            spriteBatch.DrawString(font, text, new Vector2(x, y), textColor, rotation, rotationOrigin, 1, spriteEffects, zIndex);
+            spriteBatch.DrawString(font, text, new Vector2(x, y), textColor, rotation, new Vector2(0, 0), 1, spriteEffects, zIndex);
         }
     }
 
