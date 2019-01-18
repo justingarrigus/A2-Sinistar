@@ -10,6 +10,15 @@
       <Output>C:\Users\hunte\School\HighSchool\VideoGameDesign\SinistarRepo\Sinistar\Sinistar\Sinistar\bin\x86\Debug\Content\SpriteFont2.xnb</Output>
       <Time>2019-01-15T18:51:14.3404611-06:00</Time>
     </Item>
+    <Item>
+      <Source>Untitled.png</Source>
+      <Name>Untitled</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\hunte\School\HighSchool\VideoGameDesign\SinistarRepo\Sinistar\Sinistar\Sinistar\bin\x86\Debug\Content\Untitled.xnb</Output>
+      <Time>2019-01-16T17:13:08.1429253-06:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{1C1A4340-E2C8-438A-9F11-A678752C565C}</ContentProjectGUID>

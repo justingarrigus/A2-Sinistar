@@ -15,3 +15,4 @@ C:\Users\hunte\School\HighSchool\VideoGameDesign\SinistarRepo\Sinistar\Sinistar\
 C:\Users\hunte\School\HighSchool\VideoGameDesign\SinistarRepo\Sinistar\Sinistar\Sinistar\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\hunte\School\HighSchool\VideoGameDesign\SinistarRepo\Sinistar\Sinistar\Sinistar\obj\x86\Debug\Sinistar.exe
 C:\Users\hunte\School\HighSchool\VideoGameDesign\SinistarRepo\Sinistar\Sinistar\Sinistar\obj\x86\Debug\Sinistar.pdb
+C:\Users\hunte\School\HighSchool\VideoGameDesign\SinistarRepo\Sinistar\Sinistar\Sinistar\bin\x86\Debug\Content\Untitled.xnb
