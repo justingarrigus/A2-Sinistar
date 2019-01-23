@@ -44,11 +44,14 @@ namespace Sinistar
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             uiController = new UiController(spriteBatch, GraphicsDevice);
             inputManager = new InputManager();
+
+            // TODO: Add your initialization logic here
+            inputManager.addListener(new INPUTEXAMPLE());
 
             base.Initialize();
         }
@@ -63,6 +66,9 @@ namespace Sinistar
             //font = Content.Load<SpriteFont>("SpriteFont1");
 
             // TODO: use this.Content to load your game content here
+            image = new UIImage(0.5, 0.5, 0, 0, this.Content.Load<Texture2D>("Untitled"));
+
+            uiController.addElement(image);
         }
 
         /// <summary>
@@ -87,7 +93,9 @@ namespace Sinistar
             uiController.updateScreenSize();
             inputManager.updateInput();
             // TODO: Add your update logic here
-            
+
+            image.offsetX += (int)INPUTEXAMPLE.movementExample.X;
+            image.offsetY += (int)INPUTEXAMPLE.movementExample.Y;
 
             base.Update(gameTime);
         }
@@ -102,7 +110,7 @@ namespace Sinistar
             uiController.drawElements();
             // TODO: Add your drawing code here
 
-
+            
 
 
 

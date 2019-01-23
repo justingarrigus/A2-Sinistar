@@ -7,17 +7,8 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\130113\Desktop\SinistarRepo\Sinistar\Sinistar\Sinistar\bin\x86\Debug\Content\SpriteFont2.xnb</Output>
-      <Time>2019-01-16T10:55:32.3893447-06:00</Time>
-    </Item>
-    <Item>
-      <Source>Untitled.png</Source>
-      <Name>Untitled</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\130113\Desktop\SinistarRepo\Sinistar\Sinistar\Sinistar\bin\x86\Debug\Content\Untitled.xnb</Output>
-      <Time>2019-01-16T12:02:56.3300569-06:00</Time>
+      <Output>C:\Users\hunte\School\HighSchool\VideoGameDesign\SinistarRepo\Sinistar\Sinistar\Sinistar\bin\x86\Debug\Content\SpriteFont2.xnb</Output>
+      <Time>2019-01-23T11:16:48.292592-06:00</Time>
     </Item>
     <Item>
       <Source>Untitled.png</Source>
@@ -26,7 +17,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\hunte\School\HighSchool\VideoGameDesign\SinistarRepo\Sinistar\Sinistar\Sinistar\bin\x86\Debug\Content\Untitled.xnb</Output>
-      <Time>2019-01-16T17:13:08.1429253-06:00</Time>
+      <Time>2019-01-23T11:16:48.2935946-06:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -35,10 +26,10 @@
       <TargetProfile>Reach</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\130113\Desktop\SinistarRepo\Sinistar\Sinistar\SinistarContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\130113\Desktop\SinistarRepo\Sinistar\Sinistar\Sinistar\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\130113\Desktop\SinistarRepo\Sinistar\Sinistar\Sinistar\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\130113\Desktop\SinistarRepo\Sinistar\Sinistar\Sinistar\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\hunte\School\HighSchool\VideoGameDesign\SinistarRepo\Sinistar\Sinistar\SinistarContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\hunte\School\HighSchool\VideoGameDesign\SinistarRepo\Sinistar\Sinistar\Sinistar\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\hunte\School\HighSchool\VideoGameDesign\SinistarRepo\Sinistar\Sinistar\Sinistar\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\hunte\School\HighSchool\VideoGameDesign\SinistarRepo\Sinistar\Sinistar\Sinistar\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
@@ -67,7 +58,7 @@
       </Assembly>
       <Assembly>
         <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2017-05-17T12:17:11.6083928-05:00</Value>
+        <Value>2018-10-07T22:27:44.4538827-05:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>

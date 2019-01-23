@@ -111,10 +111,10 @@ namespace Sinistar.Input
                 switch (gamepadCode)
                 {
                     case (GamepadCode.DPadU):
-                        direction.Y += 1;
+                        direction.Y -= 1;
                         break;
                     case (GamepadCode.DPadD):
-                        direction.Y -= 1;
+                        direction.Y += 1;
                         break;
                     case (GamepadCode.DPadL):
                         direction.X -= 1;
@@ -130,10 +130,10 @@ namespace Sinistar.Input
                 switch (keyboardCode)
                 {
                     case (Keys.W):
-                        direction.Y += 1;
+                        direction.Y -= 1;
                         break;
                     case (Keys.S):
-                        direction.Y -= 1;
+                        direction.Y += 1;
                         break;
                     case (Keys.A):
                         direction.X -= 1;
