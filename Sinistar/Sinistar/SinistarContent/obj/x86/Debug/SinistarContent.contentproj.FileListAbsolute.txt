@@ -1,0 +1,2 @@
+C:\Users\hunte\School\HighSchool\VideoGameDesign\SinistarRepo\Sinistar\Sinistar\SinistarContent\obj\x86\Debug\SinistarContent.contentprojResolveAssemblyReference.cache
+C:\Users\130113\Desktop\SinistarRepo\Sinistar\Sinistar\SinistarContent\obj\x86\Debug\SinistarContent.contentprojResolveAssemblyReference.cache

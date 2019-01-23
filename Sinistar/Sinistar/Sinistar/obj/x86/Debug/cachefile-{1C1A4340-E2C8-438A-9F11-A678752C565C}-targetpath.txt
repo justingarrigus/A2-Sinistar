@@ -1,0 +1,2 @@
+Content\SpriteFont2.xnb
+Content\Untitled.xnb

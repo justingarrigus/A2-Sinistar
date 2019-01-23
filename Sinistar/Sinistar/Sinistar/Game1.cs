@@ -8,6 +8,8 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using Sinistar.UiControler;
+using Sinistar.UiControler.UIElements;
 
 namespace Sinistar
 {
@@ -19,10 +21,17 @@ namespace Sinistar
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         SpriteFont font;
+
+        UiController uiController;
+
+        UIImage image;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            IsMouseVisible = true;
+
         }
 
         /// <summary>
@@ -34,6 +43,31 @@ namespace Sinistar
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            uiController = new UiController(spriteBatch, GraphicsDevice);
+
+            UIText textLabel = new UIText(0.5, 0.5, 0, 0, this.Content.Load<SpriteFont>("SpriteFont2"));
+            textLabel.setAnchorPoint(0, 0.5);
+            textLabel.setText("SOME LONG RANDOM TEXT");
+            textLabel.setZIndex(10);
+
+            UIText textLabel2 = new UIText(0.8, 0.5, 0, 0, this.Content.Load<SpriteFont>("SpriteFont2"));
+
+            textLabel2.setAnchorPoint(0, 0.5);
+            textLabel2.setText("ANOTHER LONG STRING OF TEXT");
+            textLabel2.textColor = Color.Red;
+            textLabel2.setZIndex(4);
+
+            image = new UIImage(0.5, 0.5, 0, 0, this.Content.Load<Texture2D>("Untitled"));
+            image.setAnchorPoint(0.5, 0.5);
+            image.sizeX = 200;
+            image.sizeY = 200;
+            
+
+
+            //uiController.addElement(textLabel);
+            uiController.addElement(image);
 
             base.Initialize();
         }
@@ -45,8 +79,7 @@ namespace Sinistar
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            font = Content.Load<SpriteFont>("SpriteFont1");
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            //font = Content.Load<SpriteFont>("SpriteFont1");
 
             // TODO: use this.Content to load your game content here
         }
@@ -70,8 +103,11 @@ namespace Sinistar
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
+            uiController.updateScreenSize();
 
             // TODO: Add your update logic here
+
+           // image.rotation += 0.01f;
 
             base.Update(gameTime);
         }
@@ -83,11 +119,14 @@ namespace Sinistar
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
+            uiController.drawElements();
+            
             // TODO: Add your drawing code here
-            spriteBatch.Begin();
-            spriteBatch.DrawString(font, "I AM ONE SEXY MAN ", new Vector2(50, 50), Color.Red);
-            spriteBatch.End();
+
+
+
+
+
             base.Draw(gameTime);
         }
     }
