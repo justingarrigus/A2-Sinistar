@@ -64,6 +64,19 @@
     <Compile Include="UiControler\UiController.cs" />
     <Compile Include="UiControler\UIElements\UIImage.cs" />
     <Compile Include="UiControler\UIElements\UIText.cs" />
+	
+	<Compile Include="Input\Binders\GamepadBind.cs" />
+	<Compile Include="Input\Binders\KeyboardBind.cs" />
+	<Compile Include="Input\Binders\MouseBind.cs" />
+    <Compile Include="Input\Listeners\GamepadListener.cs" />
+	<Compile Include="Input\Listeners\GeneralInputListener.cs" />
+	<Compile Include="Input\Listeners\KeyboardListener.cs" />
+	<Compile Include="Input\Listeners\MouseListener.cs" />
+	
+    <Compile Include="Input\InputObject.cs" />
+    <Compile Include="Input\InputManager.cs" />
+	<Compile Include="Input\InputListener.cs" />
+	
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
