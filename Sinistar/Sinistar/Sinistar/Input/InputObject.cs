@@ -87,6 +87,8 @@ namespace Sinistar.Input
         /// <returns></returns>
         public Vector2 getDirection()
         {
+            Vector2 direction = new Vector2(0, 0);
+
             //Joysticks
             if (deviceType == InputDeviceType.Joystick)
             {
@@ -109,15 +111,17 @@ namespace Sinistar.Input
                 switch (gamepadCode)
                 {
                     case (GamepadCode.DPadU):
-                        return new Vector2(0, 1);
+                        direction.Y += 1;
+                        break;
                     case (GamepadCode.DPadD):
-                        return new Vector2(0, -1);
+                        direction.Y -= 1;
+                        break;
                     case (GamepadCode.DPadL):
-                        return new Vector2(-1, 0);
+                        direction.X -= 1;
+                        break;
                     case (GamepadCode.DPadR):
-                        return new Vector2(1, 0);
-                    default:
-                        return Vector2.Zero;
+                        direction.X += 1;
+                        break;
                 }
             }
             //Keyboard
@@ -126,21 +130,24 @@ namespace Sinistar.Input
                 switch (keyboardCode)
                 {
                     case (Keys.W):
-                        return new Vector2(0, 1);
+                        direction.Y += 1;
+                        break;
                     case (Keys.S):
-                        return new Vector2(0, -1);
+                        direction.Y -= 1;
+                        break;
                     case (Keys.A):
-                        return new Vector2(-1, 0);
+                        direction.X -= 1;
+                        break;
                     case (Keys.D):
-                        return new Vector2(1, 0);
-                    default:
-                        return Vector2.Zero;
+                        direction.X += 1;
+                        break;
                 }
+                
             }
 
-            return Vector2.Zero;
+            direction.Normalize();
+            return direction;
         }
-
     }
 
 }

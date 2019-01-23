@@ -141,6 +141,7 @@ namespace Sinistar.Input
         private void fireInputBegan(InputDeviceType inputType, GamePadState gpdState, KeyboardState keyState, MouseState mosState, Keys keyBtn, GamepadCode gpdBtn, MouseCode mosBtn)
         {
             InputObject input = new InputObject(inputType, gpdState, mosState, keyBtn, gpdBtn, mosBtn);
+
             //General
             for (int i = 0; i < generalListeners.Count; i++)
             {
