@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Sinistar.UiControler;
 using Sinistar.UiControler.UIElements;
+using Sinistar.Input;
 
 namespace Sinistar
 {
@@ -23,6 +24,7 @@ namespace Sinistar
         SpriteFont font;
 
         UiController uiController;
+        InputManager inputManager;
 
         UIImage image;
 
@@ -46,28 +48,7 @@ namespace Sinistar
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             uiController = new UiController(spriteBatch, GraphicsDevice);
-
-            UIText textLabel = new UIText(0.5, 0.5, 0, 0, this.Content.Load<SpriteFont>("SpriteFont2"));
-            textLabel.setAnchorPoint(0, 0.5);
-            textLabel.setText("SOME LONG RANDOM TEXT");
-            textLabel.setZIndex(10);
-
-            UIText textLabel2 = new UIText(0.8, 0.5, 0, 0, this.Content.Load<SpriteFont>("SpriteFont2"));
-
-            textLabel2.setAnchorPoint(0, 0.5);
-            textLabel2.setText("ANOTHER LONG STRING OF TEXT");
-            textLabel2.textColor = Color.Red;
-            textLabel2.setZIndex(4);
-
-            image = new UIImage(0.5, 0.5, 0, 0, this.Content.Load<Texture2D>("Untitled"));
-            image.setAnchorPoint(0.5, 0.5);
-            image.sizeX = 200;
-            image.sizeY = 200;
-            
-
-
-            //uiController.addElement(textLabel);
-            uiController.addElement(image);
+            inputManager = new InputManager();
 
             base.Initialize();
         }
@@ -104,10 +85,9 @@ namespace Sinistar
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
             uiController.updateScreenSize();
-
+            inputManager.updateInput();
             // TODO: Add your update logic here
-
-           // image.rotation += 0.01f;
+            
 
             base.Update(gameTime);
         }
@@ -120,7 +100,6 @@ namespace Sinistar
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             uiController.drawElements();
-            
             // TODO: Add your drawing code here
 
 
