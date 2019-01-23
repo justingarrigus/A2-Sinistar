@@ -15,12 +15,15 @@ namespace Sinistar
     /// <summary>
     /// This is the main type for your game
     /// </summary>
-    public class Game1 : Microsoft.Xna.Framework.Game, InputListener
+    public class Game1 : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
         InputManager manager;
+        SpriteFont font;
+
+        public static Color color;
 
         public Game1()
         {
@@ -39,6 +42,9 @@ namespace Sinistar
             // TODO: Add your initialization logic here
             manager = new InputManager();
 
+            //manager.addKeyboardListener(new Test());
+            manager.setKeyboardBind(new KBBindTest(), Keys.A);
+
             base.Initialize();
         }
 
@@ -50,6 +56,8 @@ namespace Sinistar
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            font = this.Content.Load<SpriteFont>("SpriteFont1");
 
             // TODO: use this.Content to load your game content here
         }
@@ -77,6 +85,7 @@ namespace Sinistar
 
             // TODO: Add your update logic here
             
+           
 
             base.Update(gameTime);
         }
@@ -90,6 +99,11 @@ namespace Sinistar
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+            spriteBatch.Begin();
+
+            spriteBatch.DrawString(font, "TEXT", new Vector2(100, 100), color);
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
