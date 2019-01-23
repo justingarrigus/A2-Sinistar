@@ -36,6 +36,8 @@ namespace Sinistar.UiControler
         /// </summary>
         public double scaleY;
 
+        public int absX;
+        public int absY;
         public int sizeX;
         public int sizeY;
         public double anchorPointX;
@@ -115,6 +117,11 @@ namespace Sinistar.UiControler
         public static int getMaxZIndex()
         {
             return maxZIndex;
+        }
+
+        public Point getAbsolutePosition()
+        {
+            return new Point((int)(absX + sizeX * anchorPointY), (int)(absY + sizeY * anchorPointY));
         }
     }
 

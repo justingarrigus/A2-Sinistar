@@ -17,7 +17,6 @@ namespace Sinistar.UiControler
 {
     class UiController
     {
-
         private SpriteBatch spriteBatch;
         private GraphicsDevice graphicsDevice;
 
@@ -80,6 +79,8 @@ namespace Sinistar.UiControler
             int x = (int)((viewXSize * element.scaleX - element.sizeX * element.anchorPointX) + element.offsetX);
             int y = (int)((viewYSize * element.scaleY - element.sizeY * element.anchorPointY) + element.offsetY);
 
+            element.absX = x;
+            element.absY = y;
             element.draw(spriteBatch, element.rotAnchorX, element.rotAnchorY, zScale * (float)element.getZIndex(), x, y);
         }
 
@@ -100,7 +101,8 @@ namespace Sinistar.UiControler
     }
 
 
-    public interface UIButtonListener {
+    public interface UIButtonListener
+    {
         void pressed();
         void released();
 

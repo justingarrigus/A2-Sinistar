@@ -10,7 +10,6 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Sinistar.UiControler;
 using Sinistar.UiControler.UIElements;
-using Sinistar.Input;
 
 namespace Sinistar
 {
@@ -20,13 +19,24 @@ namespace Sinistar
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
+        UiController uiController;
+
+        PhysicsField phyicsField;
+
+
         SpriteBatch spriteBatch;
         SpriteFont font;
 
-        UiController uiController;
-        InputManager inputManager;
+        int screenWidth = 1000, screenHeight = 850; 
 
-        UIImage image;
+        KeyboardState lastKb; 
+
+        
+        UISpriteImage image;
+
+        Texture2D spriteSheet;
+        Texture2D debugSquare;
+        Ship ship; 
 
         public Game1()
         {
@@ -34,6 +44,9 @@ namespace Sinistar
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
+            graphics.PreferredBackBufferWidth = screenWidth;
+            graphics.PreferredBackBufferHeight = screenHeight;
+            graphics.ApplyChanges(); 
         }
 
         /// <summary>
@@ -44,14 +57,14 @@ namespace Sinistar
         /// </summary>
         protected override void Initialize()
         {
-            
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             uiController = new UiController(spriteBatch, GraphicsDevice);
-            inputManager = new InputManager();
+            phyicsField = new PhysicsField();
 
             // TODO: Add your initialization logic here
-            inputManager.addListener(new INPUTEXAMPLE());
+
+            lastKb = Keyboard.GetState();
 
             base.Initialize();
         }
@@ -66,9 +79,11 @@ namespace Sinistar
             //font = Content.Load<SpriteFont>("SpriteFont1");
 
             // TODO: use this.Content to load your game content here
-            image = new UIImage(0.5, 0.5, 0, 0, this.Content.Load<Texture2D>("Untitled"));
+            spriteSheet = Content.Load<Texture2D>("spritesheet");
+            debugSquare = Content.Load<Texture2D>("Square"); 
 
-            uiController.addElement(image);
+            Dictionary<string, Rectangle[]> textures = Load.Sprites();
+            ship = new Ship(uiController, spriteSheet, textures["ship"]); 
         }
 
         /// <summary>
@@ -91,12 +106,30 @@ namespace Sinistar
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
             uiController.updateScreenSize();
-            inputManager.updateInput();
+            phyicsField.updateBodies();
+            KeyboardState kb = Keyboard.GetState();
+            
             // TODO: Add your update logic here
+            if(kb.IsKeyDown(Keys.Left))
+            {
+                ship.Turn(-Ship.TurnSpeed); 
+            }
+            else if(kb.IsKeyDown(Keys.Right))
+            {
+                ship.Turn(Ship.TurnSpeed); 
+            }
+            else if(kb.IsKeyDown(Keys.Space))
+            {
+                ship.Fire();
+            }
 
-            image.offsetX += (int)INPUTEXAMPLE.movementExample.X;
-            image.offsetY += (int)INPUTEXAMPLE.movementExample.Y;
+            ship.Move();
 
+
+
+
+
+            lastKb = kb;
             base.Update(gameTime);
         }
 
@@ -107,13 +140,37 @@ namespace Sinistar
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            uiController.drawElements();
+            
             // TODO: Add your drawing code here
 
-            
+            //DEBUG
+            spriteBatch.Begin();
 
+            //Ship
+            spriteBatch.Draw(debugSquare, new Rectangle(
+                (int)(ship.image.absX + ship.image.sizeX * ship.image.anchorPointX) - ship.image.offsetX + ship.rect.X,
+                (int)(ship.image.absY + ship.image.sizeY * ship.image.anchorPointY) - ship.image.offsetY + ship.rect.Y,
+                ship.rect.Width, ship.rect.Height
+            ), Color.Red);
 
+            //Sinistar
 
+            //Asteroids
+            List<PhysicsBody> roids = phyicsField.physBodies;
+            for (int i = 0; i < roids.Count; i++)
+            {
+                PhysicsBody body = roids[i];
+                // (body is void) {
+
+                //}
+            }
+
+            //Bad boys
+
+            spriteBatch.End();
+
+            //////////////
+            uiController.drawElements();
             base.Draw(gameTime);
         }
     }
