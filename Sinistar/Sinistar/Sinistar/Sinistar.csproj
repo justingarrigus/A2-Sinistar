@@ -57,6 +57,9 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AI\Sinistar.cs" />
+    <Compile Include="AI\WhatAreTheyCalled.cs" />
+    <Compile Include="Entities\Ammo.cs" />
     <Compile Include="Entities\Astroids.cs" />
     <Compile Include="Physics\PhysicsField.cs" />
     <Compile Include="Load.cs" />

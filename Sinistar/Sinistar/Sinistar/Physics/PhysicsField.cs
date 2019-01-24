@@ -10,11 +10,13 @@ namespace Sinistar
     {
         public List<Rectangle> rects;
         public List<PhysicsBody> physBodies;
+        private int count;
 
         public PhysicsField()
         {
             this.rects = new List<Rectangle>();
             this.physBodies = new List<PhysicsBody>();
+            count = 0;
         }
 
         public void addObject(Rectangle rect)
@@ -36,11 +38,18 @@ namespace Sinistar
 
         public void updateBodies()
         {
+            count++;
+
             for (int i=0; i<physBodies.Count; i++)
             {
                 PhysicsBody body = physBodies[i];
-                body.rect.X += (int)body.velo.X;
-                body.rect.Y += (int)body.velo.Y;
+                body.updatePhysics();
+                body.updateCount(count);
+
+                if (body.disabled == true)
+                {
+                    body.rect.X = int.MaxValue;
+                }
 
                 //Bad collision detector
                 for (int b=0; b<physBodies.Count; b++)
@@ -73,6 +82,8 @@ namespace Sinistar
 
         public void updatePhysics()
         {
+            updateGraphics();
+
             pos.X += velo.X;
             pos.Y += velo.Y;
 
@@ -80,6 +91,10 @@ namespace Sinistar
             rect.Y = (int)pos.Y;
         }
 
+
+
+        public abstract void updateCount(int count);
+        public abstract void updateGraphics();
         public abstract void collidedWith(PhysicsBody other);
     }
 }

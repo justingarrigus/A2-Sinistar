@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Sinistar.UiControler;
 using Sinistar.UiControler.UIElements;
+using Sinistar.Entities;
 
 namespace Sinistar
 {
@@ -18,6 +19,8 @@ namespace Sinistar
     /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
+        private const bool IS_DEBUG_MODE = true;
+
         GraphicsDeviceManager graphics;
         UiController uiController;
 
@@ -27,6 +30,8 @@ namespace Sinistar
         SpriteBatch spriteBatch;
         SpriteFont font;
 
+        int lastShot;
+        int count = 0;
         int screenWidth = 1000, screenHeight = 850; 
 
         KeyboardState lastKb; 
@@ -66,6 +71,8 @@ namespace Sinistar
 
             lastKb = Keyboard.GetState();
 
+            
+
             base.Initialize();
         }
 
@@ -83,7 +90,19 @@ namespace Sinistar
             debugSquare = Content.Load<Texture2D>("Square"); 
 
             Dictionary<string, Rectangle[]> textures = Load.Sprites();
-            ship = new Ship(uiController, spriteSheet, textures["ship"]); 
+            ship = new Ship(uiController, spriteSheet, textures["ship"]);
+            phyicsField.addPhysicsBody(ship);
+
+            Random ran = new Random();
+            for (int i = 0; i <= 10; i++)
+            {
+                Astroids roid = new Astroids(spriteSheet, textures["planetoid"][0], uiController, 50, 50, Vector2.Zero);
+                roid.pos.X = ran.Next(100, screenWidth-100);
+                roid.pos.Y = ran.Next(100, screenHeight-100);
+                phyicsField.addPhysicsBody(roid);
+
+                roid.update();
+            }
         }
 
         /// <summary>
@@ -118,9 +137,22 @@ namespace Sinistar
             {
                 ship.Turn(Ship.TurnSpeed); 
             }
-            else if(kb.IsKeyDown(Keys.Space))
+
+            if (kb.IsKeyDown(Keys.Space))
             {
-                ship.Fire();
+                if (count > lastShot + 10)
+                {
+                    Ammo ammo = new Ammo(
+                        debugSquare,
+                        uiController,
+                        new Point((int)ship.pos.X + ship.image.sizeX/2, (int)ship.pos.Y + ship.image.sizeY / 2),
+                        ship.rot,
+                        new Vector2(ship.velo.X * 5, ship.velo.Y * 5)
+                    );
+                    phyicsField.addPhysicsBody(ammo);
+
+                    lastShot = count;
+                }
             }
 
             ship.Move();
@@ -128,7 +160,7 @@ namespace Sinistar
 
 
 
-
+            count++;
             lastKb = kb;
             base.Update(gameTime);
         }
@@ -139,35 +171,44 @@ namespace Sinistar
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-            
+            GraphicsDevice.Clear(Color.Black);
+
             // TODO: Add your drawing code here
 
             //DEBUG
-            spriteBatch.Begin();
-
-            //Ship
-            spriteBatch.Draw(debugSquare, new Rectangle(
-                (int)(ship.image.absX + ship.image.sizeX * ship.image.anchorPointX) - ship.image.offsetX + ship.rect.X,
-                (int)(ship.image.absY + ship.image.sizeY * ship.image.anchorPointY) - ship.image.offsetY + ship.rect.Y,
-                ship.rect.Width, ship.rect.Height
-            ), Color.Red);
-
-            //Sinistar
-
-            //Asteroids
-            List<PhysicsBody> roids = phyicsField.physBodies;
-            for (int i = 0; i < roids.Count; i++)
+            if (IS_DEBUG_MODE)
             {
-                PhysicsBody body = roids[i];
-                // (body is void) {
+                spriteBatch.Begin();
 
-                //}
+                //Asteroids
+                List<PhysicsBody> roids = phyicsField.physBodies;
+                for (int i = 0; i < roids.Count; i++)
+                {
+                    PhysicsBody body = roids[i];
+                    if (body is Astroids)
+                    {
+                        Astroids roid = (Astroids)body;
+                        spriteBatch.Draw(debugSquare, new Rectangle(
+                            (int)(roid.image.absX + roid.image.sizeX * roid.image.anchorPointX) - roid.image.offsetX + roid.rect.X,
+                            (int)(roid.image.absY + roid.image.sizeY * roid.image.anchorPointY) - roid.image.offsetY + roid.rect.Y,
+                            roid.rect.Width, roid.rect.Height
+                        ), Color.Beige);
+                    }
+                }
+
+                //Bad boys
+
+                //Sinistar
+
+                //Ship
+                spriteBatch.Draw(debugSquare, new Rectangle(
+                    (int)(ship.image.absX + ship.image.sizeX * ship.image.anchorPointX) - ship.image.offsetX + ship.rect.X,
+                    (int)(ship.image.absY + ship.image.sizeY * ship.image.anchorPointY) - ship.image.offsetY + ship.rect.Y,
+                    ship.rect.Width, ship.rect.Height
+                ), Color.Red);
+                
+                spriteBatch.End();
             }
-
-            //Bad boys
-
-            spriteBatch.End();
 
             //////////////
             uiController.drawElements();
